@@ -1,0 +1,12 @@
+#card {
+    width: 500px;
+    height: 500px;
+}
+
+.success {
+    color: green;
+}
+
+.not-success {
+    color: red;
+}

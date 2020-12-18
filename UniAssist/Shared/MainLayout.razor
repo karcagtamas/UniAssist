@@ -1,0 +1,31 @@
+﻿@using UniAssist.Services
+@using UniAssist.Enums
+@inherits LayoutComponentBase
+@inject ThemeService ThemeService
+
+<MatThemeProvider Theme="GetTheme()">
+    <div id="main">
+        @Body
+    </div>
+</MatThemeProvider>
+
+@code {
+
+    readonly MatTheme _lightTheme = new()
+    {
+        Primary = MatThemeColors.Orange._500.Value,
+        Secondary = MatThemeColors.BlueGrey._500.Value,
+    };
+
+    readonly MatTheme _darkTheme = new()
+    {
+        Primary = "green",
+        Secondary = "orange"
+    };
+
+    private MatTheme GetTheme()
+    {
+        return this.ThemeService.CurrentTheme == ThemeType.Dark ? _darkTheme : _lightTheme;
+    }
+
+}

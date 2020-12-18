@@ -1,0 +1,13 @@
+@using UniAssist.Services
+@using UniAssist.Enums
+@inject ThemeService ThemeService
+
+<MatSlideToggle TValue="bool" Value="ThemeService.CurrentTheme == ThemeType.Dark" ValueChanged="ThemeChange"></MatSlideToggle>
+
+@code {
+
+    private async void ThemeChange(bool value)
+    {
+        await this.ThemeService.SetTheme(value ? ThemeType.Dark : ThemeType.Light);
+    }
+}

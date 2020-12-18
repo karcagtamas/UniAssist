@@ -1,0 +1,23 @@
+﻿@page "/"
+
+<MatCard Class="main-card" Stroke="true">
+    <MatBody2 Class="h-100 text-center p-5">
+        <ThemeSwitcher></ThemeSwitcher>
+        <h1>Welcome to the UniAssist</h1>
+        @if (IsInitialized)
+        {
+            <h5 Class="success">Your app is initalized</h5>
+        }
+        else
+        {
+            <h5 Class="not-success">Your app is not initalized</h5>
+        }
+        <MatButton>Hello</MatButton>
+    </MatBody2>
+</MatCard>
+
+@code {
+
+    private bool IsInitialized { get; set; } = false;
+
+}
