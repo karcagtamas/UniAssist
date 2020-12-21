@@ -1,6 +1,17 @@
-#card {
-    width: 500px;
-    height: 500px;
+#theme-switch {
+    text-align: right;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+h5 {
+    margin-bottom: 1rem;
+}
+
+#wd-input {
+    margin-bottom: 1rem;
 }
 
 .success {
@@ -9,4 +20,8 @@
 
 .not-success {
     color: red;
+}
+
+.not-success, .success {
+    font-weight: bold;
 }

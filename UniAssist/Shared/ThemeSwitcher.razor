@@ -3,7 +3,7 @@
 @inject IThemeService ThemeService
 @inject StoreService StoreService
 
-<MatSlideToggle TValue="bool" ValueChanged="ThemeChange"></MatSlideToggle>
+<MatSlideToggle TValue="bool" ValueChanged="ThemeChange" Label="Dark Theme"></MatSlideToggle>
 
 @code {
     private ThemeType ThemeType { get; set; }

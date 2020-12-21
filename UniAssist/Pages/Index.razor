@@ -1,23 +1,28 @@
 ﻿@page "/"
 
-<MatCard Class="main-card" Stroke="true">
-    <MatBody2 Class="h-100 text-center p-5">
+<MatCard Class="main-card p-2" Stroke="true">
+    <div id="theme-switch">
         <ThemeSwitcher></ThemeSwitcher>
+    </div>
+    <MatBody2 Class="h-100 text-center p-4">
+
         <h1>Welcome to the UniAssist</h1>
         @if (IsInitialized)
         {
             <h5 Class="success">Your app is initalized</h5>
+            <MatButton Raised="true" OnClick="Open">Open</MatButton>            
         }
         else
         {
             <h5 Class="not-success">Your app is not initalized</h5>
+            <div id="wd-input">
+                <MatTextField @bind-Value="WorkingDirectoryPath" Label="Working Directory Path" HelperText="Give your working directory's path" FullWidth="true" ReadOnly="true"></MatTextField>
+            </div>
+            <div>
+                <MatButton Raised="true" OnClick="Choose">Choose Folder</MatButton>   
+                <MatButton Raised="true" OnClick="Init" Disabled="String.IsNullOrEmpty(WorkingDirectoryPath)">Initalize</MatButton>
+            </div>
+                   
         }
-        <MatButton>Hello</MatButton>
     </MatBody2>
 </MatCard>
-
-@code {
-
-    private bool IsInitialized { get; set; } = false;
-
-}
