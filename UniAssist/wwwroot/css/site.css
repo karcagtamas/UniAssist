@@ -10,6 +10,7 @@ html, body {
     flex-grow: 1;
     height: 100%;
     font-family: 'Zilla Slab', sans-serif;
+    background: linear-gradient(to top right, #0033cc66 0%, #00ffff66 100%);
 }
 
 .valid.modified:not([type=checkbox]) {
