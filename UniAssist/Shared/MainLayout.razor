@@ -1,9 +1,10 @@
 ﻿@using UniAssist.Services
 @using UniAssist.Enums
 @inherits LayoutComponentBase
-@inject ThemeService ThemeService
+@inject IThemeService ThemeService
+@inject StoreService StoreService
 
-<MatThemeProvider Theme="GetTheme()">
+<MatThemeProvider Theme="Current">
     <div id="main">
         @Body
     </div>
@@ -11,21 +12,44 @@
 
 @code {
 
+    private MatTheme Current { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        UpdateTheme();
+        this.StoreService.OnChange += UpdateTheme;
+        // TODO: Remove
+    }
+
     readonly MatTheme _lightTheme = new()
     {
-        Primary = MatThemeColors.Orange._500.Value,
-        Secondary = MatThemeColors.BlueGrey._500.Value,
+        Primary = "#2962ff",
+        Secondary = "#880e4f",
+        Surface = "#ffffff",
+        OnPrimary = "white",
+        OnSecondary = "white",
+        OnSurface = "black"
     };
-
+    
     readonly MatTheme _darkTheme = new()
     {
-        Primary = "green",
-        Secondary = "orange"
+        Primary = "#2962ff",
+        Secondary = "#880e4f",
+        Surface = "#242424",
+        OnPrimary = "white",
+        OnSecondary = "white",
+        OnSurface = "white"
     };
 
     private MatTheme GetTheme()
     {
-        return this.ThemeService.CurrentTheme == ThemeType.Dark ? _darkTheme : _lightTheme;
+        return this.StoreService.GetTheme() == ThemeType.Dark ? _darkTheme : _lightTheme;
     }
 
+    private async void UpdateTheme()
+    {
+        this.Current = this.GetTheme();
+        await InvokeAsync(StateHasChanged);
+    }
 }

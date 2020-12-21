@@ -27,8 +27,9 @@ namespace UniAssist
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<ThemeService>();
-            services.AddBlazoredLocalStorage();
+            services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
+            services.AddSingleton<StoreService>();
+            services.AddScoped<IThemeService, ThemeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +49,7 @@ namespace UniAssist
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseEmbeddedBlazorContent(typeof(MatBlazor.BaseMatComponent).Assembly);
-            
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -66,14 +67,16 @@ namespace UniAssist
         private async void ElectronBootstrap(IWebHostEnvironment env)
         {
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
-                {Width = 1152, Height = 940, Show = false, Resizable = false, WebPreferences = new WebPreferences {NodeIntegration = true}});
+            {
+                Width = 1152, Height = 940, Show = false, Resizable = false,
+                WebPreferences = new WebPreferences {NodeIntegration = true}
+            });
 
             await browserWindow.WebContents.Session.ClearCacheAsync();
 
-            if (env.IsDevelopment())
-            {
-                browserWindow.SetMenu(new []{new MenuItem{ Role = MenuRole.toggledevtools}}); 
-            }
+            browserWindow.SetMenu(env.IsDevelopment()
+                ? new[] {new MenuItem {Role = MenuRole.toggledevtools}}
+                : new MenuItem[] { });
 
             browserWindow.OnReadyToShow += () => browserWindow.Show();
             browserWindow.SetTitle("UniAssist");
