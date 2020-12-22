@@ -6,12 +6,29 @@ using Microsoft.AspNetCore.Components;
 
 namespace UniAssist.Pages
 {
+    /// <summary>
+    /// Index Page.
+    /// </summary>
     public partial class Index
     {
+        /// <summary>
+        /// Navigation Manager
+        /// </summary>
         [Inject] private NavigationManager NavigationManager { get; set; }
+        
+        /// <summary>
+        /// App is initialized.
+        /// </summary>
         private bool IsInitialized { get; set; } = false;
+        
+        /// <summary>
+        /// Working directory path.
+        /// </summary>
         private string WorkingDirectoryPath { get; set; }
 
+        /// <summary>
+        /// Open application if application is initialized.
+        /// </summary>
         private void Open()
         {
             if (this.IsInitialized)
@@ -20,6 +37,9 @@ namespace UniAssist.Pages
             }
         }
 
+        /// <summary>
+        /// Initialize application if working directory is not empty.
+        /// </summary>
         private async void Init()
         {
             if (!this.IsInitialized)
@@ -37,6 +57,10 @@ namespace UniAssist.Pages
             }
         }
 
+        /// <summary>
+        /// Choose working directory.
+        /// Open open folder dialog.
+        /// </summary>
         private async void Choose()
         {
             var options = new OpenDialogOptions

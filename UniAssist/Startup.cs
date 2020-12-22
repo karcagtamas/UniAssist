@@ -7,22 +7,31 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using UniAssist.Data;
 using UniAssist.Services;
 
 namespace UniAssist
 {
+    /// <summary>
+    /// Application Startup class
+    /// </summary>
     public class Startup
     {
+        
+        /// <summary>
+        /// Initialize startup
+        /// </summary>
+        /// <param name="configuration">Startup configuration</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
+        
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
@@ -57,13 +66,19 @@ namespace UniAssist
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
-
+            
+            // Enable Electron
             if (HybridSupport.IsElectronActive)
             {
                 ElectronBootstrap(env);
             }
         }
 
+        /// <summary>
+        /// Electron bootstrapping.
+        /// Add Electron window round web application.
+        /// </summary>
+        /// <param name="env">Environment</param>
         private async void ElectronBootstrap(IWebHostEnvironment env)
         {
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
