@@ -1,3 +1,4 @@
+using ElectronNET.API;
 using UniAssist.Enums;
 
 namespace UniAssist.Models
@@ -7,10 +8,15 @@ namespace UniAssist.Models
     /// </summary>
     public class Store
     {
-        /// <summary>
+        /// <value>
         /// Theme type.
-        /// </summary>
+        /// </value>
         public ThemeType ThemeType { get; set; }
+        
+        /// <value>
+        /// Working directory path.
+        /// </value>
+        public string WorkingDirectory { get; set; }
 
         /// <summary>
         /// Initialize store.

@@ -4,9 +4,11 @@ using ElectronNET.API.Entities;
 using EmbeddedBlazorContent;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UniAssist.Database;
 using UniAssist.Services;
 
 namespace UniAssist
@@ -37,6 +39,12 @@ namespace UniAssist
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
+            
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlite("Data source=UniAssist.db");
+            });
+            
             services.AddSingleton<StoreService>();
             services.AddScoped<IThemeService, ThemeService>();
         }
