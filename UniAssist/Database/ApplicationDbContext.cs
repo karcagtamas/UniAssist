@@ -10,5 +10,6 @@ namespace UniAssist.Database
         }
 
         public DbSet<Period> Periods { get; set; }
+        public DbSet<Config> Config { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Microsoft.AspNetCore.Components;
+using UniAssist.Services;
 
 namespace UniAssist.Pages
 {
@@ -11,20 +12,34 @@ namespace UniAssist.Pages
     /// </summary>
     public partial class Index
     {
-        /// <summary>
+        /// <value>
         /// Navigation Manager
-        /// </summary>
+        /// </value>
         [Inject] private NavigationManager NavigationManager { get; set; }
         
-        /// <summary>
+        /// <value>
+        /// Config Service
+        /// </value>
+        [Inject]
+        private IConfigService ConfigService { get; set; }
+        
+        /// <value>
         /// App is initialized.
-        /// </summary>
+        /// </value>
         private bool IsInitialized { get; set; } = false;
         
-        /// <summary>
+        /// <value>
         /// Working directory path.
-        /// </summary>
+        /// </value>
         private string WorkingDirectoryPath { get; set; }
+
+        /// <summary>
+        /// Initialize Index Component
+        /// </summary>
+        protected override void OnInitialized()
+        {
+            this.IsInitialized = this.ConfigService.WorkingDirectoryExist();
+        }
 
         /// <summary>
         /// Open application if application is initialized.
@@ -50,10 +65,12 @@ namespace UniAssist.Pages
                     
                     var mainWindow = Electron.WindowManager.BrowserWindows.First();
 
-                    var folder = await Electron.Dialog.ShowMessageBoxAsync(mainWindow, options);
+                    await Electron.Dialog.ShowMessageBoxAsync(mainWindow, options);
                     return;
                 }
-                // TODO: Initialize and refresh
+                
+                this.ConfigService.SetWorkingDirectory(this.WorkingDirectoryPath);
+                this.IsInitialized = this.ConfigService.WorkingDirectoryExist();
             }
         }
 
