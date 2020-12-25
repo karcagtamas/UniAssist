@@ -43,3 +43,8 @@ html, body {
     right: 0.75rem;
     top: 0.5rem;
 }
+
+.content-card {
+    width: 80%;
+    height: 80%;
+}

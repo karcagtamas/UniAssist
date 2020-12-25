@@ -40,7 +40,7 @@ namespace UniAssist.Services
         /// <summary>
         /// Get current theme settings.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Current Theme</returns>
         public ThemeType GetTheme()
         {
             return this.Store.ThemeType;

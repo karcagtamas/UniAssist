@@ -42,11 +42,7 @@ namespace UniAssist.Services
             this._storeService.SetTheme(await this._localStorage.GetItemAsStringAsync("theme") == "dark" ? ThemeType.Dark : ThemeType.Light);
         }
 
-        /// <summary>
-        /// Set theme to local storage by the given Theme's type.
-        /// </summary>
-        /// <param name="type">Theme type.</param>
-        /// <returns>Task</returns>
+        /// <inheritdoc />
         public async Task SetTheme(ThemeType type)
         {
             await this._localStorage.SetItemAsync("theme", type == ThemeType.Dark ? "dark" : "light");

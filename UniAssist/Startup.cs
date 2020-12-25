@@ -18,7 +18,6 @@ namespace UniAssist
     /// </summary>
     public class Startup
     {
-        
         /// <summary>
         /// Initialize startup
         /// </summary>
@@ -27,12 +26,12 @@ namespace UniAssist
         {
             Configuration = configuration;
         }
-        
+
         /// <summary>
         /// Configuration
         /// </summary>
         public IConfiguration Configuration { get; }
-        
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
@@ -42,17 +41,15 @@ namespace UniAssist
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
-            
-            services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseSqlite("Data source=UniAssist.db");
-            });
-            
+
+            services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlite("Data source=UniAssist.db"); });
+
             services.AddSingleton<StoreService>();
             services.AddScoped<IThemeService, ThemeService>();
             services.AddScoped<IConfigService, ConfigService>();
+            services.AddScoped<IPeriodService, PeriodService>();
         }
-        
+
         /// <summary>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
@@ -82,7 +79,7 @@ namespace UniAssist
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
-            
+
             // Enable Electron
             if (HybridSupport.IsElectronActive)
             {
@@ -99,8 +96,9 @@ namespace UniAssist
         {
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
             {
-                Width = 1152, Height = 940, Show = false, Resizable = false,
-                WebPreferences = new WebPreferences {NodeIntegration = true}
+                Show = false, Resizable = true, Fullscreenable = true, FullscreenWindowTitle = true,
+                WebPreferences = new WebPreferences {NodeIntegration = true},
+                Width = 1000, Height = 800
             });
 
             await browserWindow.WebContents.Session.ClearCacheAsync();

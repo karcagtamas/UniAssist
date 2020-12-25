@@ -5,7 +5,14 @@ namespace UniAssist.Enums
     /// </summary>
     public enum ThemeType
     {
+        /// <value>
+        /// Light Theme
+        /// </value>
         Light,
+        
+        /// <value>
+        /// Dark Theme
+        /// </value>
         Dark
     }
 }

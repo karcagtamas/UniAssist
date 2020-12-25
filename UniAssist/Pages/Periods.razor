@@ -1,0 +1,11 @@
+@page "/periods"
+
+<MatCard Class="content-card p-2" Stroke="true">
+    <h1>Periods</h1>
+    <MatBody2 Class="h-100 text-center p-4">
+        @foreach (var period in PeriodList)
+        {
+            <div>@period.Name</div>
+        }
+    </MatBody2>
+</MatCard>

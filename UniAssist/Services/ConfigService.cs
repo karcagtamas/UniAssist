@@ -17,6 +17,7 @@ namespace UniAssist.Services
         /// <summary>
         /// Initialize Config Service 
         /// </summary>
+        /// <param name="context">Database Context</param>
         public ConfigService(ApplicationDbContext context)
         {
             _context = context;
@@ -45,28 +46,19 @@ namespace UniAssist.Services
             return default;
         }
 
-        /// <summary>
-        /// Get working directory path.
-        /// </summary>
-        /// <returns>Path of working directory if it set.</returns>
+        /// <inheritdoc />
         public string GetWorkingDirectory()
         {
             return this.GetConfig<string>(WorkingDirectoryName);
         }
 
-        /// <summary>
-        /// Working directory is exists or not.
-        /// </summary>
-        /// <returns>True if it is exists.</returns>
+        /// <inheritdoc />
         public bool WorkingDirectoryExist()
         {
             return !string.IsNullOrEmpty(this.GetWorkingDirectory());
         }
 
-        /// <summary>
-        /// Set working directory path.
-        /// </summary>
-        /// <param name="value">Path of working directory</param>
+        /// <inheritdoc />
         public void SetWorkingDirectory(string value)
         {
             Config conf = this._context.Config.FirstOrDefault(x => x.Name == WorkingDirectoryName);
