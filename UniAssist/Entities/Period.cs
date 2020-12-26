@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using UniAssist.Models;
 
@@ -20,5 +21,22 @@ namespace UniAssist.Entities
         [StringLength(80)]
         [Required]
         public string Name { get; set; }
+        
+        /// <value>
+        /// Period folder name
+        /// </value>
+        [Required]
+        [StringLength(20)]
+        public string FolderName { get; set; }
+        
+        /// <value>
+        /// Subjects
+        /// </value>
+        public virtual ICollection<Subject> Subjects { get; set; }
+        
+        /// <value>
+        /// Notes
+        /// </value>
+        public virtual ICollection<PeriodNote> Notes { get; set; }
     }
 }

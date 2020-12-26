@@ -48,3 +48,14 @@ html, body {
     width: 80%;
     height: 80%;
 }
+
+.page-title {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.page-title .spacer {
+    flex-grow: 1;
+}

@@ -1,11 +1,25 @@
 @page "/periods"
 
 <MatCard Class="content-card p-2" Stroke="true">
-    <h1>Periods</h1>
+    <div class="page-title">
+        <h1>Periods</h1>
+        <span class="spacer"></span>
+        @if (IsAdding)
+        {
+            <MatIconButton Icon="save" OnClick="SaveAdding"></MatIconButton>
+            <MatIconButton Icon="cancel" OnClick="CancelAdding"></MatIconButton>            
+        }
+        else
+        {
+            <MatIconButton Icon="add" OnClick="Add"></MatIconButton>            
+        }
+        <MatIconButton Icon="home" OnClick="OpenHome"></MatIconButton>
+    </div>
+
     <MatBody2 Class="h-100 text-center p-4">
         @foreach (var period in PeriodList)
         {
-            <div>@period.Name</div>
+            <PeriodListData Period="@period"></PeriodListData>            
         }
     </MatBody2>
 </MatCard>
