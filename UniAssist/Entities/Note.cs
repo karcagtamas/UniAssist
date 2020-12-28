@@ -1,12 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using UniAssist.Models;
 
 namespace UniAssist.Entities
 {
     /// <summary>
     /// Note base class
     /// </summary>
-    public class Note
+    public class Note : IEntity
     {
         /// <value>
         /// Note Id

@@ -38,5 +38,10 @@ namespace UniAssist.Entities
         /// Notes
         /// </value>
         public virtual ICollection<PeriodNote> Notes { get; set; }
+        
+        /// <value>
+        /// Period tasks
+        /// </value>
+        public virtual ICollection<PeriodTask> Tasks { get; set; }
     }
 }

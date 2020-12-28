@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using UniAssist.Models;
 
 namespace UniAssist.Entities
 {
     /// <summary>
     /// Subject Entity
     /// </summary>
-    public class Subject
+    public class Subject : IEntity
     {
         /// <value>
         /// Subject Id
@@ -59,8 +59,34 @@ namespace UniAssist.Entities
         public string FolderName { get; set; }
         
         /// <value>
+        /// Period Id
+        /// </value>
+        [Required]
+        public string PeriodId { get; set; }
+        
+        /// <value>
+        /// Period
+        /// </value>
+        public virtual Period Period { get; set; }
+        
+        /// <value>
+        /// Subject files
+        /// </value>
+        public virtual ICollection<File> Files { get; set; }
+        
+        /// <value>
+        /// Subject folders
+        /// </value>
+        public virtual ICollection<Folder> Folders { get; set; }
+        
+        /// <value>
         /// Subject notes
         /// </value>
         public virtual ICollection<SubjectNote> Notes { get; set; }
+        
+        /// <value>
+        /// Subject tasks
+        /// </value>
+        public virtual ICollection<SubjectTask> Tasks { get; set; }
     }
 }
