@@ -10,7 +10,9 @@
         @if (IsInitialized)
         {
             <h5 Class="success">Your app is initalized</h5>
-            <MatButton Raised="true" OnClick="Open">Open</MatButton>            
+            <MatTooltip Tooltip="Open Application">
+                <MatButton RefBack="context" Raised="true" OnClick="Open">Open</MatButton>     
+            </MatTooltip>
         }
         else
         {
@@ -19,10 +21,13 @@
                 <MatTextField @bind-Value="WorkingDirectoryPath" Label="Working Directory Path" HelperText="Give your working directory's path" FullWidth="true" ReadOnly="true"></MatTextField>
             </div>
             <div>
-                <MatButton Raised="true" OnClick="Choose">Choose Folder</MatButton>   
-                <MatButton Raised="true" OnClick="Init" Disabled="String.IsNullOrEmpty(WorkingDirectoryPath)">Initalize</MatButton>
+                <MatTooltip Tooltip="Choose Folder for Working Directory">
+                    <MatButton RefBack="context" Raised="true" OnClick="Choose">Choose Folder</MatButton>
+                </MatTooltip>
+                <MatTooltip Tooltip="Initialize Application">
+                    <MatButton RefBack="context" Raised="true" OnClick="Init" Disabled="String.IsNullOrEmpty(WorkingDirectoryPath)">Initalize</MatButton>
+                </MatTooltip>
             </div>
-                   
         }
     </MatBody2>
 </MatCard>

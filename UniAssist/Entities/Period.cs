@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using UniAssist.Models;
@@ -18,15 +19,15 @@ namespace UniAssist.Entities
         /// <value>
         /// Period Name.
         /// </value>
-        [StringLength(80)]
-        [Required]
+        [StringLength(80, ErrorMessage = "Maximum length is 80")]
+        [Required(ErrorMessage = "Field is required")]
         public string Name { get; set; }
         
         /// <value>
         /// Period folder name
         /// </value>
-        [Required]
-        [StringLength(20)]
+        [Required(ErrorMessage = "Field is required")]
+        [StringLength(20, ErrorMessage = "Maximum length is 20")]
         public string FolderName { get; set; }
         
         /// <value>
@@ -43,5 +44,13 @@ namespace UniAssist.Entities
         /// Period tasks
         /// </value>
         public virtual ICollection<PeriodTask> Tasks { get; set; }
+
+        /// <summary>
+        /// Initialize Period
+        /// </summary>
+        public Period()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
     }
 }

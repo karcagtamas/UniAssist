@@ -2,24 +2,51 @@
 
 <MatCard Class="content-card p-2" Stroke="true">
     <div class="page-title">
-        <h1>Periods</h1>
+        <h1>Periods (@PeriodList.Count)</h1>
         <span class="spacer"></span>
         @if (IsAdding)
         {
-            <MatIconButton Icon="save" OnClick="SaveAdding"></MatIconButton>
-            <MatIconButton Icon="cancel" OnClick="CancelAdding"></MatIconButton>            
+            <MatTooltip Tooltip="Save Period creating">
+                <MatIconButton RefBack="context" Icon="save" OnClick="SaveAdding"></MatIconButton>
+            </MatTooltip>
+            <MatTooltip Tooltip="Cancel Period creating">
+                <MatIconButton RefBack="context" Icon="cancel" OnClick="CancelAdding"></MatIconButton>
+            </MatTooltip>
         }
         else
         {
-            <MatIconButton Icon="add" OnClick="Add"></MatIconButton>            
+            <MatTooltip Tooltip="Add Period">
+                <MatIconButton RefBack="context" Icon="add" OnClick="Add"></MatIconButton>
+            </MatTooltip>
+                        
         }
-        <MatIconButton Icon="home" OnClick="OpenHome"></MatIconButton>
+        <MatTooltip Tooltip="Back to Home">
+            <MatIconButton RefBack="context" Icon="home" OnClick="OpenHome"></MatIconButton>
+        </MatTooltip>
     </div>
 
     <MatBody2 Class="h-100 text-center p-4">
-        @foreach (var period in PeriodList)
+        @if (IsAdding)
         {
-            <PeriodListData Period="@period"></PeriodListData>            
+            <EditForm EditContext="PeriodContext">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div>
+                    <MatTextField @bind-Value="PeriodModel.Name" Label="Period Name" HelperText="Period Display Name" FullWidth="true"></MatTextField>
+                    <ValidationMessage For="() => PeriodModel.Name"></ValidationMessage>
+                </div>
+                <div>
+                    <MatTextField @bind-Value="PeriodModel.FolderName" Label="Period Folder Name" HelperText="Period Folder Name" FullWidth="true"></MatTextField>
+                    <ValidationMessage For="() => PeriodModel.FolderName"></ValidationMessage>
+                </div>
+            </EditForm>
+        }
+        else
+        {
+            @foreach (var period in PeriodList.Select((val, i) => new {i, val}))
+            {
+                <PeriodListData Period="@period.val" StartDivider="true" EndDivider="@(period.i == PeriodList.Count - 1)"></PeriodListData>
+                                                   
+            } 
         }
     </MatBody2>
 </MatCard>
