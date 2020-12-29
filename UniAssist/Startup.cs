@@ -48,6 +48,7 @@ namespace UniAssist
             services.AddScoped<IThemeService, ThemeService>();
             services.AddScoped<IConfigService, ConfigService>();
             services.AddScoped<IPeriodService, PeriodService>();
+            services.AddScoped<ISubjectService, SubjectService>();
         }
 
         /// <summary>

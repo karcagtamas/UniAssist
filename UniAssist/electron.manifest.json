@@ -4,7 +4,7 @@
     "imageFile": ""
   },
   "name": "UniAssist",
-  "author": "",
+  "author": "Karcag Tamas",
   "singleInstance": false,
   "environment": "Production",
   "build": {
@@ -30,6 +30,7 @@
         "filter": [ "**/*" ]
       },
       "**/*"
-    ]
+    ],
+    "icon": "assets/icon.ico"
   }
 }

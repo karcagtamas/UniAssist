@@ -4,15 +4,15 @@ using UniAssist.Entities;
 namespace UniAssist.Shared.Components
 {
     /// <summary>
-    /// Period List Data Component
+    /// Subject list Data Component
     /// </summary>
-    public partial class PeriodListData
+    public partial class SubjectListData
     {
         /// <value>
         /// Period
         /// </value>
         [Parameter]
-        public Period Period { get; set; }
+        public Subject Subject { get; set; }
         
         [Inject]
         private NavigationManager NavigationManager { get; set; }
@@ -32,36 +32,27 @@ namespace UniAssist.Shared.Components
         private string GetTooltipMessage()
         {
             string msg = "";
-            if (this.Period.Notes != null && this.Period.Notes.Count > 0)
+            if (this.Subject.Notes != null && this.Subject.Notes.Count > 0)
             {
-                msg += "Notes: " + this.Period.Notes.Count;
+                msg += "Notes: " + this.Subject.Notes.Count;
             }
             
-            if (this.Period.Tasks != null && this.Period.Tasks.Count > 0)
+            if (this.Subject.Tasks != null && this.Subject.Tasks.Count > 0)
             {
                 if (msg != "")
                 {
                     msg += " ";
                 }
 
-                msg += "Tasks: " + this.Period.Tasks.Count;
+                msg += "Tasks: " + this.Subject.Tasks.Count;
             }
-            
-            if (this.Period.Subjects != null && this.Period.Subjects.Count > 0)
-            {
-                if (msg != "")
-                {
-                    msg += " ";
-                }
 
-                msg += "Subjects: " + this.Period.Subjects.Count;
-            }
-            return msg == "" ? this.Period.Name : msg;
+            return msg == "" ? this.Subject.LongName : msg;
         }
 
         private void Open()
         {
-            this.NavigationManager.NavigateTo($"subjects/{this.Period.Id}");
+            this.NavigationManager.NavigateTo($"subjects/{this.Subject.Id}");
         }
     }
 }

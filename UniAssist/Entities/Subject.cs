@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using UniAssist.Models;
@@ -18,22 +19,22 @@ namespace UniAssist.Entities
         /// <value>
         /// Subject long name
         /// </value>
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Field is required")]
+        [StringLength(100, ErrorMessage = "Max length is 100")]
         public string LongName { get; set; }
         
         /// <value>
         /// Subject short name
         /// </value>
-        [Required]
-        [StringLength(20)]
+        [Required(ErrorMessage = "Field is required")]
+        [StringLength(20, ErrorMessage = "Max length is 20")]
         public string ShortName { get; set; }
         
         /// <value>
         /// Subject code
         /// </value>
-        [Required]
-        [StringLength(10)]
+        [Required(ErrorMessage = "Field is required")]
+        [StringLength(10, ErrorMessage = "Max length is 10")]
         public string Code { get; set; }
         
         /// <value>
@@ -44,25 +45,26 @@ namespace UniAssist.Entities
         /// <value>
         /// Subject credit value
         /// </value>
+        [Required(ErrorMessage = "Field is required")]
         public int Credit { get; set; }
-        
-        /// <value>
-        /// Subject status
-        /// </value>
-        public string Status { get; set; }
-        
+
         /// <value>
         /// Subject folder name
         /// </value>
-        [Required]
-        [StringLength(20)]
+        [Required(ErrorMessage = "Field is required")]
+        [StringLength(20, ErrorMessage = "Max length is 20")]
         public string FolderName { get; set; }
         
         /// <value>
         /// Period Id
         /// </value>
-        [Required]
+        [Required(ErrorMessage = "Field is required")]
         public string PeriodId { get; set; }
+        
+        /// <value>
+        /// Result mark of subject
+        /// </value>
+        public int? Result { get; set; }
         
         /// <value>
         /// Period
@@ -88,5 +90,23 @@ namespace UniAssist.Entities
         /// Subject tasks
         /// </value>
         public virtual ICollection<SubjectTask> Tasks { get; set; }
+
+        /// <summary>
+        /// Initialize Subject Entity
+        /// </summary>
+        public Subject()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        /// <summary>
+        /// Initialize Subject Entity with Period
+        /// </summary>
+        /// <param name="period">Subject Period</param>
+        public Subject(Period period)
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.PeriodId = period.Id;
+        }
     }
 }

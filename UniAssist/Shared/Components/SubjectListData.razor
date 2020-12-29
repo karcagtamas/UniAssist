@@ -6,12 +6,12 @@
     <div id="data">
         <MatTooltip Tooltip="@GetTooltipMessage()">
             <div @ref="context.Current" id="title">
-                @Period.Name
+                @Subject.LongName
             </div>
         </MatTooltip>
-        <div>&nbsp;(@Period.FolderName)</div>
+        <div>&nbsp;(@Subject.ShortName)</div>
         <span class="spacer"></span>
-        <MatTooltip Tooltip="@("Open " + Period.Name + " on new page")">
+        <MatTooltip Tooltip="@("Open " + Subject.ShortName + " on new page")">
             <MatIconButton RefBack="context" Icon="open_in_new" OnClick="Open"></MatIconButton>
         </MatTooltip>
 

@@ -1,0 +1,75 @@
+@page "/subjects/{Id}"
+
+<MatCard Class="content-card p-2" Stroke="true">
+    <div class="page-title">
+        <h1>Subjects (@(Period.Subjects?.Count ?? 0))</h1>
+        <span class="spacer"></span>
+        @if (IsAdding)
+        {
+            <MatTooltip Tooltip="Save Subject creating">
+                <MatIconButton RefBack="context" Icon="save" OnClick="SaveAdding"></MatIconButton>
+            </MatTooltip>
+            <MatTooltip Tooltip="Cancel Subject creating">
+                <MatIconButton RefBack="context" Icon="cancel" OnClick="CancelAdding"></MatIconButton>
+            </MatTooltip>            
+        }
+        else
+        {
+            <MatTooltip Tooltip="Add Subject">
+                <MatIconButton RefBack="context" Icon="add" OnClick="Add"></MatIconButton>
+            </MatTooltip>            
+        }
+        <MatTooltip Tooltip="Edit Period">
+            <MatIconButton RefBack="context" Icon="edit" OnClick="EditPeriod"></MatIconButton>
+        </MatTooltip>
+        <MatTooltip Tooltip="Back to Periods">
+            <MatIconButton RefBack="context" Icon="keyboard_backspace" OnClick="OpenPeriods"></MatIconButton>
+        </MatTooltip>
+        <MatTooltip Tooltip="Back to Home">
+            <MatIconButton RefBack="context" Icon="home" OnClick="OpenHome"></MatIconButton>
+        </MatTooltip>
+    </div>
+
+    <MatBody2 Class="h-100 text-center p-4">
+        @if (IsAdding)
+        {
+            <EditForm EditContext="SubjectContext">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div>
+                    <MatTextField @bind-Value="SubjectModel.LongName" Label="Long Name" HelperText="Subject Long Name" FullWidth="true"></MatTextField>
+                    <ValidationMessage For="() => SubjectModel.LongName"></ValidationMessage>
+                </div>
+                <div>
+                    <MatTextField @bind-Value="SubjectModel.ShortName" Label="Short Name" HelperText="Subject Short Name" FullWidth="true"></MatTextField>
+                    <ValidationMessage For="() => SubjectModel.ShortName"></ValidationMessage>
+                </div>
+                <div>
+                    <MatTextField @bind-Value="SubjectModel.Code" Label="Code" HelperText="Subject Code" FullWidth="true"></MatTextField>
+                    <ValidationMessage For="() => SubjectModel.Code"></ValidationMessage>
+                </div>
+                <div>
+                    <MatTextField @bind-Value="SubjectModel.Description" Label="Description" HelperText="Subject Description" FullWidth="true" TextArea="true"></MatTextField>
+                    <ValidationMessage For="() => SubjectModel.Description"></ValidationMessage>
+                </div>
+                <div>
+                    <MatNumericUpDownField @bind-Value="SubjectModel.Credit" Label="Credit" HelperText="Subject Credit" FullWidth="true" DecimalPlaces="0" Step="1" Minimum="0" Maximum="10"></MatNumericUpDownField>
+                    <ValidationMessage For="() => SubjectModel.Credit"></ValidationMessage>
+                </div>
+                <div>
+                    <MatTextField @bind-Value="SubjectModel.FolderName" Label="Folder Name" HelperText="Subject Folder Name" FullWidth="true"></MatTextField>
+                    <ValidationMessage For="() => SubjectModel.FolderName"></ValidationMessage>
+                </div>
+            </EditForm>            
+        }
+        else
+        {
+            @if (Period.Subjects != null)
+            {
+                @foreach (var subject in Period.Subjects.Select((val, i) => new {i, val}))
+                {
+                    <SubjectListData Subject="@subject.val" StartDivider="true" EndDivider="@(subject.i == (int) Period.Subjects?.Count - 1)"></SubjectListData>                    
+                }
+            }
+        }
+    </MatBody2>
+</MatCard>
