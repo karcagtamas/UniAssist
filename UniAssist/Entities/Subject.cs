@@ -108,5 +108,23 @@ namespace UniAssist.Entities
             this.Id = Guid.NewGuid().ToString();
             this.PeriodId = period.Id;
         }
+        
+        /// <summary>
+        /// Initialize Subject Entity with Period from Subject Model
+        /// </summary>
+        /// <param name="period">Subject Period</param>
+        /// <param name="model">Subject Model</param>
+        public Subject(Period period, SubjectModel model)
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.PeriodId = period.Id;
+            this.LongName = model.LongName;
+            this.ShortName = model.ShortName;
+            this.Code = model.Code;
+            this.Description = model.Description;
+            this.Credit = model.Credit;
+            this.FolderName = model.FolderName;
+            this.Result = model.Result;
+        }
     }
 }

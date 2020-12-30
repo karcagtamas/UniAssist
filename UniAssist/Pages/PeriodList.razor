@@ -2,7 +2,7 @@
 
 <MatCard Class="content-card p-2" Stroke="true">
     <div class="page-title">
-        <h1>Periods (@PeriodList.Count)</h1>
+        <h1>Periods (@Periods.Count)</h1>
         <span class="spacer"></span>
         @if (IsAdding)
         {
@@ -42,9 +42,9 @@
         }
         else
         {
-            @foreach (var period in PeriodList.Select((val, i) => new {i, val}))
+            @foreach (var period in Periods.Select((val, i) => new {i, val}))
             {
-                <PeriodListData Period="@period.val" StartDivider="true" EndDivider="@(period.i == PeriodList.Count - 1)"></PeriodListData>
+                <PeriodListData Period="@period.val" StartDivider="true" EndDivider="@(period.i == Periods.Count - 1)"></PeriodListData>
                                                    
             } 
         }

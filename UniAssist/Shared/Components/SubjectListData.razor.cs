@@ -52,7 +52,7 @@ namespace UniAssist.Shared.Components
 
         private void Open()
         {
-            this.NavigationManager.NavigateTo($"subjects/{this.Subject.Id}");
+            this.NavigationManager.NavigateTo($"/subjects/{this.Subject.Id}");
         }
     }
 }

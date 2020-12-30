@@ -61,7 +61,7 @@ namespace UniAssist.Shared.Components
 
         private void Open()
         {
-            this.NavigationManager.NavigateTo($"subjects/{this.Period.Id}");
+            this.NavigationManager.NavigateTo($"/periods/{this.Period.Id}");
         }
     }
 }

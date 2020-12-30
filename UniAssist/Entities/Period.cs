@@ -52,5 +52,16 @@ namespace UniAssist.Entities
         {
             this.Id = Guid.NewGuid().ToString();
         }
+
+        /// <summary>
+        /// Initialize Period from Period Model
+        /// </summary>
+        /// <param name="model">Period Model</param>
+        public Period(PeriodModel model)
+        {
+            this.Id = Guid.NewGuid().ToString();
+            this.Name = model.Name;
+            this.FolderName = model.FolderName;
+        }
     }
 }

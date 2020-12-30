@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using UniAssist.Entities;
+using UniAssist.Models;
 using UniAssist.Services;
 
 namespace UniAssist.Pages
@@ -10,7 +11,7 @@ namespace UniAssist.Pages
     /// <summary>
     /// Periods Page
     /// </summary>
-    public partial class Periods
+    public partial class PeriodList
     {
         [Inject]
         private IPeriodService PeriodService { get; set; }
@@ -18,9 +19,9 @@ namespace UniAssist.Pages
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
-        private List<Period> PeriodList { get; set; } = new();
+        private List<Period> Periods { get; set; } = new();
         private bool IsAdding { get; set; }
-        private Period PeriodModel { get; set; } = new();
+        private PeriodModel PeriodModel { get; set; } = new();
         private EditContext PeriodContext { get; set; }
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace UniAssist.Pages
 
         private void GetPeriods()
         {
-            this.PeriodList = this.PeriodService.GetAll().ToList();
+            this.Periods = this.PeriodService.GetAll().ToList();
         }
 
         private void OpenHome()
@@ -49,7 +50,7 @@ namespace UniAssist.Pages
 
         private void CancelAdding()
         {
-            this.PeriodModel = new Period();
+            this.PeriodModel = new PeriodModel();
             this.PeriodContext = new EditContext(PeriodModel);
             this.GetPeriods();
             this.IsAdding = false;
@@ -59,8 +60,8 @@ namespace UniAssist.Pages
         {
             if (this.PeriodContext.Validate())
             {
-                this.PeriodService.Add(this.PeriodModel);
-                this.PeriodModel = new Period();
+                this.PeriodService.Add(new Period(this.PeriodModel));
+                this.PeriodModel = new PeriodModel();
                 this.PeriodContext = new EditContext(PeriodModel);
                 this.GetPeriods();
                 this.IsAdding = false;
