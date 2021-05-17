@@ -11,7 +11,10 @@ namespace UniAssist.Services
     /// <typeparam name="T">Type param</typeparam>
     public class DatabaseService<T> : IDatabaseService<T> where T : class, IEntity
     {
-        private readonly ApplicationDbContext _context;
+        /// <summary>
+        /// Database Context
+        /// </summary>
+        protected readonly ApplicationDbContext Context;
 
         /// <summary>
         /// Initialize Database Service
@@ -19,46 +22,46 @@ namespace UniAssist.Services
         /// <param name="context">Database Context</param>
         public DatabaseService(ApplicationDbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         /// <inheritdoc />
-        public T Get<TK>(TK id)
+        public virtual T Get<TK>(TK id)
         {
-            return this._context.Set<T>().Find(id);
+            return this.Context.Set<T>().Find(id);
         }
 
         /// <inheritdoc />
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
-            return this._context.Set<T>().ToList();
+            return this.Context.Set<T>().ToList();
         }
 
         /// <inheritdoc />
-        public void Add(T value)
+        public virtual void Add(T value)
         {
-            this._context.Set<T>().Add(value);
+            this.Context.Set<T>().Add(value);
             this.Commit();
         }
 
         /// <inheritdoc />
-        public void Update(T value)
+        public virtual void Update(T value)
         {
-            this._context.Set<T>().Update(value);
+            this.Context.Set<T>().Update(value);
             this.Commit();
         }
         
         /// <inheritdoc />
-        public void Delete(T value)
+        public virtual void Delete(T value)
         {
-            this._context.Set<T>().Remove(value);
+            this.Context.Set<T>().Remove(value);
             this.Commit();
         }
 
         /// <inheritdoc />
-        public void Commit()
+        public virtual void Commit()
         {
-            this._context.SaveChanges();
+            this.Context.SaveChanges();
         }
     }
 }

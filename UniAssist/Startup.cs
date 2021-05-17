@@ -35,7 +35,7 @@ namespace UniAssist
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">Services</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
@@ -109,6 +109,7 @@ namespace UniAssist
                 : new MenuItem[] { });
 
             browserWindow.OnReadyToShow += () => browserWindow.Show();
+            browserWindow.OnClosed += () => Electron.App.Quit();
             browserWindow.SetTitle("UniAssist");
         }
     }
